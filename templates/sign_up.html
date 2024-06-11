@@ -93,12 +93,19 @@
                   <div class="col-md-12">
                      <div class="titlepage">
                         <h2>Create <span class="white">New Account & Sign In</span></h2>
+                        <br>
+                        {% if messages %}
+							   {% for message in messages %}
+							   <center><h2 class="{{message_tag}}">{{message}}</h2></center>
+							   {% endfor %}
+							   {% endif %}
                      </div>
                   </div>
                </div>
                <div class="row">
                   <div class="col-md-6">
-                     <form id="request" class="main_form">
+                     <form id="request" action="{% url "sign_in" %}" method="post" class="main_form">
+                        {% csrf_token %}
                         <div class="row">
                            <div class="col-md-12 ">
                               <input class="contactus" placeholder="Username" type="text" name="Username"> 
@@ -107,10 +114,7 @@
                               <input class="contactus" placeholder="Email" type="email" name="Email"> 
                            </div>
                            <div class="col-md-12">
-                              <input class="contactus" maxlength="10" placeholder="Phone Number" type="text" name="Phone Number">                          
-                           </div>
-                           <div class="col-md-12">
-                              <input class="contactus" placeholder="Password" type="Password" name="Phone Number"> 
+                              <input class="contactus" placeholder="Password" type="Password" name="Password"> 
                            </div>
                            <div class="col-md-12">
                               <button class="send_btn">Sign Up</button>
@@ -120,7 +124,8 @@
                   </div>
                   <div class="col-md-6">
                      <div id="">
-                        <form id="request" class="main_form">
+                        <form id="request" method="post" action="{% url "log_in" %}" class="main_form">
+                           {% csrf_token %}
                            <div class="row">
                               <div class="col-md-12 ">
                                  <input class="contactus" placeholder="Username" type="text" name="Username"> 
@@ -161,10 +166,11 @@
                               <div class="address">
                                  <h3>Links</h3>
                                  <ul class="Menu_footer">
-                                    <li class="active"> <a href="#">Home</a> </li>
+                                    <li class="active"> <a href="{% url "index" %}">Home</a> </li>
                                     <li><a href="#about">About </a> </li>
                                     <li><a href="#work">Work</a> </li>
-                                    <li><a href="#contact">Contact </a> </li>
+                                    <li><a href="#contact">Chat </a> </li>
+                                    <li><a href="{% url "sign_up" %}">Sign In </a> </li>
                                  </ul>
                               </div>
                            </div>
