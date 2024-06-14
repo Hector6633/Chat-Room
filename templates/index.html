@@ -50,11 +50,11 @@
                <li><a href="#about">About </a> </li>
                <li><a href="#work">Work</a> </li>
                <li><a href="#contact">Chat </a> </li>
-               {% if not user.is_authenticated %}
+               {% comment %} {% if not user.is_authenticated %}
                <li><a href="{% url "log_in" %}">Sign In </a> </li>
                {% else %}
                <li><a href="{% url "logout" %}">Sign Out </a> </li>
-               {% endif %}
+               {% endif %} {% endcomment %}
             </ul>
          </nav>
       </div>
@@ -69,7 +69,7 @@
                         <div class="full">
                            <div class="center-desk">
                               <div class="logo">
-                                 <a href="index.html"><img src="{% static "images/logo.png" %}" alt="#" /></a>
+                                 <a href="{% url "index" %}"><img src="{% static "images/logo.png" %}" alt="#" /></a>
                               </div>
                            </div>
                         </div>
@@ -82,16 +82,16 @@
                            {% endfor %}
 							      {% endif %}
 
-                           {% if user %}
-                           <li class="down_btn"><a href="#">Hi, {{user}} </a></li>
-                           {% endif %}
+                           {% comment %} {% if user %} {% endcomment %}
+                           <li class="down_btn"><a href="#">Hi, Friend's </a></li>
+                           {% comment %} {% endif %} {% endcomment %}
 
-                           {% if not user.is_authenticated %}
+                           {% comment %} {% if not user.is_authenticated %}
                            <li><a href="{% url "sign_up" %}">Sign Up</a></li>
                            {% else %}
                            <li><a href="{% url "logout" %}">Sign Out </a> </li>
-                           {% endif %}
-                           <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                           {% endif %} {% endcomment %}
+                           {% comment %} <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li> {% endcomment %}
                            <li><button type="button" id="sidebarCollapse">
                               <img src="{% static "images/menu_icon.png" %}" alt="#" />
                               </button>
@@ -119,7 +119,7 @@
                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
                               <div class="text-bg">
                                  <h1>Get<br> Chat With <br>New Rooms</h1>
-                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis </p>
+                                 <p>“Discussion is the lifeblood of learning. It’s a journey that transports us from the realm of thought to the realm of understanding. It’s not just about exchanging information, but about weaving a tapestry of insights that enlightens and enriches our perspectives.” 😊</p>
                                  <a class="read_more" href="#">Read more</a>
                               </div>
                            </div>
@@ -139,7 +139,7 @@
                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
                               <div class="text-bg">
                                  <h1>Make<br> A Good <br>Community</h1>
-                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis </p>
+                                 <p>“A community is not just a group of people living in the same place.It’s a vibrant tapestry of shared experiences, values, and aspirations. It’s about unity in diversity, about finding common ground amidst differences. A community is a testament to human connection and solidarity, a beacon of hope in a world that often seems divided.” 😊 </p>
                                  <a class="read_more" href="#">Read more</a>
                               </div>
                            </div>
@@ -159,7 +159,7 @@
                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
                               <div class="text-bg">
                                  <h1>Get<br> Thinking A <br>long time</h1>
-                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis </p>
+                                 <p>"Chat is the digital heartbeat of human connection. It's a symphony of words that brings minds together, fostering understanding and empathy. It's a testament to our innate desire to connect, share, and grow together in this vast digital universe." 😊 </p>
                                  <a class="read_more" href="#">Read more</a>
                               </div>
                            </div>
@@ -273,54 +273,30 @@
                </div>
                <div class="row">
                   <div class="col-md-6">
-                     <form id="request" class="main_form">
+                     <form id="request" method="post" action="checkview" class="main_form">
+                        {% csrf_token %}
                         <div class="row">
-                           {% if user %}
                            <div class="col-md-12 ">
-                              <input class="contactus" placeholder="{{user}}" type="text" required name="Username"> 
+                              <input class="contactus" placeholder="Username" type="text" required name="username"> 
                            </div>
                            <div class="col-md-12">
-                              <input class="contactus" placeholder="New Room Name" type="text" required name="Newroomname"> 
+                              <input class="contactus" placeholder="Room Name" type="text" required name="room_name"> 
                            </div>
-                           {% endif %}
 
-                           {% if user.is_authenticated %}
+                           {% comment %} {% if user.is_authenticated %} {% endcomment %}
                            <div class="col-md-12">
-                           <button class="send_btn">New Room</button>
+                           <button class="send_btn">Join Room</button>
                            </div>
-                           {% else %}
+                           {% comment %} {% else %}
                            <div class="col-md-12">
                            <button class="send_btn">Login & Chat</button>
                            </div>
-                           {% endif %}
+                           {% endif %} {% endcomment %}
                         </div>
                      </form>
                   </div>
                   <div class="col-md-6">
                      <div id="">
-                        <form id="request" class="main_form">
-                           <div class="row">
-                              {% if user %}
-                              <div class="col-md-12 ">
-                                 <input class="contactus" placeholder="{{user}}" type="text" required name="Username"> 
-                              </div>
-                              <div class="col-md-12">
-                                 <input class="contactus" placeholder="Room Name" type="text" required name="Roomname"> 
-                              </div>
-                              {% endif %}
-                             
-                              {% if user.is_authenticated %}
-                              <div class="col-md-12">
-                              <button class="send_btn">Join Room</button>
-                              </div>
-                              {% else %}
-                              <div class="col-md-12">
-                              <button class="send_btn">Login & Chat</button>
-                              </div>
-                              {% endif %}
-                              
-                           </div>
-                        </form>
                      </div>
                   </div>
                </div>
@@ -336,30 +312,17 @@
                         <table class="table table-hover">
                            <thead>
                              <tr>
-                               <th scope="col">#</th>
-                               <th scope="col">User Name</th>
-                               <th scope="col">Room Name</th>
-                               <th scope="col">Created Date</th>
+                               <th scope="col">Joined  Rooms </th>
+                               <th scope="col">Created Date  </th>
                              </tr>
                            </thead>
                            <tbody>
+                              {% for room_name in room_name %}
                              <tr>
-                               <th scope="row">1</th>
-                               <td>Mark</td>
-                               <td>Otto</td>
-                               <td>@mdo</td>
+                               <td>{{room_name.name}}</td>
+                               <td>{{room_name.date}}</td>
                              </tr>
-                             <tr>
-                               <th scope="row">2</th>
-                               <td>Jacob</td>
-                               <td>Thornton</td>
-                               <td>@fat</td>
-                             </tr>
-                             <tr>
-                               <th scope="row">3</th>
-                               <td colspan="2">Larry the Bird</td>
-                               <td>@twitter</td>
-                             </tr>
+                             {% endfor %}
                            </tbody>
                          </table>
                      </div>
@@ -396,7 +359,7 @@
                                     <li><a href="#about">About </a> </li>
                                     <li><a href="#work">Work</a> </li>
                                     <li><a href="#contact">Chat </a> </li>
-                                    <li><a href="{% url "sign_up" %}">Sign In </a> </li>
+                                    {% comment %} <li><a href="{% url "sign_up" %}">Sign In </a> </li> {% endcomment %}
                                  </ul>
                               </div>
                            </div>
@@ -418,10 +381,10 @@
                            </div>
                            <div class="col-md-7 col-sm-6">
                               <div class="address">
-                                 <h3>Newsletter </h3>
+                                 <h3>FeedBack </h3>
                               </div>
                               <form class="bottom_form">
-                                 <input class="enter" placeholder="Enter Your Email" type="text" name="Enter Your Email">
+                                 <input class="enter" placeholder="Enter Your Email" type="Email" required name="Enter Your Email">
                                  <button class="sub_btn">subscribe</button>
                               </form>
                            </div>
@@ -433,7 +396,7 @@
                   <div class="container">
                      <div class="row">
                         <div class="col-md-12">
-                           <p>Copyright 2024 All Right Reserved By <a href="https://canva.design/">Canva Design</a></p>
+                           <p>Copyright 2024 All Right Reserved By <a href="https://canva.design/">Potoub</a></p>
                         </div>
                      </div>
                   </div>

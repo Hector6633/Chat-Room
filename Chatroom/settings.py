@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'livereload',
     'chat',
     'theme',
-    'account',
+    # 'account',
 ]
 
 MIDDLEWARE = [

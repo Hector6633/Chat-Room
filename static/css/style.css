@@ -832,6 +832,11 @@ ul.easy li a:hover {
      opacity: 1;
 }
 
+#request-1 *::placeholder {
+     color: #777977;
+     opacity: 1;
+}
+
 #map {
      height: 425px;
      overflow: hidden;
