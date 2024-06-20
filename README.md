@@ -1,2 +1,2 @@
 # Chat-Room
-To access web page https://potoub.pythonanywhere.com/
+To access web application https://potoub.pythonanywhere.com/
